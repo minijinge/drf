@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import datetime
 import os
 import sys
 from pathlib import Path
@@ -158,4 +159,10 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSION': 'v1',
     # 'ALLOWED_VERSIONS': ['v1', 'v2'],
     # 'VERSION_PARAM': 'version',
+}
+
+# 配置jwt 以及token的过期时间
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }

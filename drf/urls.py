@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from rest_framework_jwt.views import obtain_jwt_token
 
 from drf.settings import MEDIA_ROOT
 
@@ -29,6 +30,9 @@ urlpatterns = [
     # rest_framework 自带登录/登出 路由,Session Authentication,你可以访问：http://127.0.0.1:8000/api-auth/login/
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    # jwt的认证接口 适用于前后端分离 不要携带敏感信息
+    # 获取jwt token（这里用到了django的api-auth认证，也就是用户名密码认证）
+    re_path(r'^jwt/login/$', obtain_jwt_token),
 
     path('admin/', admin.site.urls),
 ]
