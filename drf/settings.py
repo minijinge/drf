@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'rest_framework',  # drf 插件，实现rest api
     'coreapi',
     'coreschema',
+    'corsheaders',  # django-cors-headers 解决跨域问题
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # django-cors-headers 解决跨域问题,放最前面
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +57,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True  # django-cors-headers 解决跨域问题，如果为True，则将不使用白名单，并且将接受所有来源。默认为False
+CORS_ORIGIN_WHITELIST = []  # 授权进行跨站点HTTP请求的来源列表。默认为[]
+CORS_ALLOW_CREDENTIALS = True  # django-cors-headers 解决跨域问题,如果为True，则将允许将cookie包含在跨站点HTTP请求中。默认为False
 
 ROOT_URLCONF = 'drf.urls'
 
