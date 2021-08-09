@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',  # drf 插件，实现rest api
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,23 @@ STATICFILES_DIRS = (
 # 图片等media资源存放路径
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# django rest framework 相关的配置放在这里
+REST_FRAMEWORK = {
+
+    # 全局认证设置
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.BasicAuthentication',  # 基本认证：账号密码认证 drf默认配置
+    #     'rest_framework.authentication.SessionAuthentication',  # session 认证 drf默认配置
+    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',  # jwt 认证
+    # ),
+
+    # 捕获django-rest-framework没有处理的异常
+    # 'EXCEPTION_HANDLER': 'utils.custom_error_exception.custom_exception_handler',
+
+    # 版本管控
+    # 'DEFAULT_VERSIONING_CLASS': "rest_framework.versioning.URLPathVersioning",
+    # 'DEFAULT_VERSION': 'v1',
+    # 'ALLOWED_VERSIONS': ['v1', 'v2'],
+    # 'VERSION_PARAM': 'version',
+}

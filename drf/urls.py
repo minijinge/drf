@@ -26,5 +26,9 @@ urlpatterns = [
     # media资源路由配置
     re_path(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
+    # rest_framework 自带登录/登出 路由,Session Authentication,你可以访问：http://127.0.0.1:8000/api-auth/login/
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+
     path('admin/', admin.site.urls),
 ]
