@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+*$#vue1(x^m7*f)#65yzh#1a_p%7kd)l5)gs7x&ijatqdyz+e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # allow all hosts to access
 
 
 # Application definition
@@ -57,8 +57,7 @@ ROOT_URLCONF = 'drf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # templates path is here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,8 +78,12 @@ WSGI_APPLICATION = 'drf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'targetmap',
+        'USER': 'root',
+        'PASSWORD': 'minijinge',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
     }
 }
 
@@ -107,16 +110,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'  # 中文支持，django1.8以后支持；1.8以前是zh-cn
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False  # 默认是Ture，时间是utc时间，由于我们要用本地时间，所用手动修改为false！
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -127,3 +129,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django模板使用,静态文件路径
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
