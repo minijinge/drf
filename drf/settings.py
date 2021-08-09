@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # drf 插件，实现rest api
+    'coreapi',
+    'coreschema',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +145,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # django rest framework 相关的配置放在这里
 REST_FRAMEWORK = {
+    # 新版drf schema_class默认用的是rest_framework.schemas.openapi.AutoSchema
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 
     # 全局认证设置
     # 'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from rest_framework.documentation import include_docs_urls
 from rest_framework_jwt.views import obtain_jwt_token
 
 from drf.settings import MEDIA_ROOT
@@ -33,6 +34,9 @@ urlpatterns = [
     # jwt的认证接口 适用于前后端分离 不要携带敏感信息
     # 获取jwt token（这里用到了django的api-auth认证，也就是用户名密码认证）
     re_path(r'^jwt/login/$', obtain_jwt_token),
+
+    # docs文档
+    path(r'docs/', include_docs_urls(title='DRF框架')),
 
     path('admin/', admin.site.urls),
 ]
