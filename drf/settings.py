@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'coreapi',
     'coreschema',
     'corsheaders',  # django-cors-headers 解决跨域问题
-    # 'rest_framework_swagger',
-    'drf_yasg',
+    'rest_framework_swagger',
+    # 'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -167,10 +167,10 @@ REST_FRAMEWORK = {
     # 'EXCEPTION_HANDLER': 'utils.custom_error_exception.custom_exception_handler',
 
     # 版本管控
-    # 'DEFAULT_VERSIONING_CLASS': "rest_framework.versioning.URLPathVersioning",
-    # 'DEFAULT_VERSION': 'v1',
-    # 'ALLOWED_VERSIONS': ['v1', 'v2'],
-    # 'VERSION_PARAM': 'version',
+    'DEFAULT_VERSIONING_CLASS': "rest_framework.versioning.URLPathVersioning",
+    'DEFAULT_VERSION': 'v1',  # 默认版本
+    'ALLOWED_VERSIONS': ['v1'],  # 允许版本
+    'VERSION_PARAM': 'version',
 }
 
 # 配置jwt 以及token的过期时间
