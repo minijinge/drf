@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'coreapi',
     'coreschema',
     'corsheaders',  # django-cors-headers 解决跨域问题
-    'rest_framework_swagger',
+    # 'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

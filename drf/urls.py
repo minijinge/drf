@@ -16,14 +16,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 from rest_framework.documentation import include_docs_urls
 from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_swagger.views import get_swagger_view
+# from rest_framework_swagger.views import get_swagger_view
 
 from drf.settings import MEDIA_ROOT
 
 
-schema_view = get_swagger_view(title='Pastebin API')
+# schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_schema_view(
+   openapi.Info(
+      title="DRF框架API接口文档",
+      default_version='v1.0',
+      description="DRF框架API接口文档",
+      terms_of_service="127.0.0.1:8000/redoc",
+      contact=openapi.Contact(email="kdhy@163.com"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     # apps
@@ -40,10 +55,15 @@ urlpatterns = [
     re_path(r'^jwt/login/$', obtain_jwt_token),
 
     # swagger
-    re_path(r'^swagger', schema_view),
+    # re_path(r'^swagger', schema_view),
+
+    # 配置drf-yasg路由
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     # docs文档
-    path(r'docs/', include_docs_urls(title='DRF框架')),
+    path(r'docs/', include_docs_urls(title='DRF接口API')),
 
     path('admin/', admin.site.urls),
 ]
